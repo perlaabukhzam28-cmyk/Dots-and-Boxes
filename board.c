@@ -75,3 +75,9 @@ int validate_move(const Game *g, int r1, int c1, int r2, int c2) {
     return 0;
 }
 
+void apply_move(Game *g, int r1, int c1, int r2, int c2) {
+    if (r1 == r2)
+        g->hlines[r1][c1 < c2 ? c1 : c2] = 1;
+    else
+        g->vlines[r1 < r2 ? r1 : r2][c1] = 1;
+}
