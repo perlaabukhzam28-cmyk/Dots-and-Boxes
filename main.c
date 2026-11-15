@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include "game.h"
+#include <stdlib.h>
+int main(void){
+Game g;
+int r1, c1, r2, c2, rc, err;
+init_game(&g);
+
+print_board(&g);
+printf("Player %c's turn. Enter the row and column of the first dot and second dot e.g(0 0 0 1): ", g.current ==0  ? 'A':'B');
+rc = read_move(&r1, &c1, &r2, &c2);
+if(rc <0){
+printf("\n Input ended. Exiting. \n");
+return 1;}
+if (rc ==0){
+printf("Invalid input.Enter four numbers. \n");
+exit(1);
+}
+err = validate_move(&g, r1, c1, r2, c2);
+if(err ==1){
+printf("Dots must be inside the grid(rows 0-%d, columns0-%d).\n", ROWS, COLS);
+exit(1);
+}
+if(err ==2){
+printf("Dots cant't be diagonal.\n");
+exit(1);
+}
+if(err == 3){
+printf("This line is already drawn");
+exit(1); 
+} 
+
+/* passed all checks, move is validated */
+apply_move(&g, r1, c1, r2, c2);
+print_board(&g);
+
+return 0;
+}
