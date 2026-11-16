@@ -3,9 +3,9 @@
 #include <stdlib.h>
 int main(void){
 Game g;
-int r1, c1, r2, c2, rc, err;
+int r1, c1, r2, c2, rc, err,boxes;
 init_game(&g);
-
+while(!(is_game_over)){
 print_board(&g);
 printf("Player %c's turn. Enter the row and column of the first dot and second dot e.g(0 0 0 1): ", g.current ==0  ? 'A':'B');
 rc = read_move(&r1, &c1, &r2, &c2);
@@ -32,7 +32,11 @@ exit(1);
 
 /* passed all checks, move is validated */
 apply_move(&g, r1, c1, r2, c2);
+boxes = check_boxes(&g, r1, c1, r2, c2);
+        if (boxes == 0)
+            g.current = 1 - g.current;
+}
 print_board(&g);
-
+declare_winner(&g);
 return 0;
 }
