@@ -1,5 +1,5 @@
 #include <stdio.h>
-  #include "game.h"
+#include "game.h"
 
   static int box_complete(const Game *g, int r, int c) {
       return g->hlines[r][c] && g->hlines[r + 1][c] &&
